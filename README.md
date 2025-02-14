@@ -27,7 +27,6 @@ npm install
 
 #### **Create a `.env` file** in the `server/` directory and add:
 ```env
-PORT=5000
 ACCESS_DATABASE_URL=your_mongodb_uri
 ACCESS_TOKEN=your_jwt_secret
 ```
