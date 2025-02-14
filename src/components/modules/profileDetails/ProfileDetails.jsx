@@ -11,7 +11,7 @@ const ProfileDetails = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch(`https://naria-group-ltd-server.vercel.app/users?email=${user?.email}`, {
+        const response = await fetch(`${import.meta.env.VITE_SERVER_API}/users?email=${user?.email}`, {
           headers: {
             authorization: `bearer ${localStorage.getItem('accessToken')}`,
           },
@@ -32,7 +32,7 @@ const ProfileDetails = () => {
   // Handle form submission
   const onSubmit = async (data) => {
     try {
-      const response = await fetch(`https://naria-group-ltd-server.vercel.app/users?email=${user?.email}`, {
+      const response = await fetch(`${import.meta.env.VITE_SERVER_API}/users?email=${user?.email}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: data.name }),

@@ -62,7 +62,7 @@ const AuthProvider = ({ children }) => {
     // Fetch user details
     useEffect(() => {
         const fetchData = async () => {
-            const res = await fetch(`https://naria-group-ltd-server.vercel.app/users?email=${user?.email}`, {
+            const res = await fetch(`${import.meta.env.VITE_SERVER_API}/users?email=${user?.email}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`,
                 },

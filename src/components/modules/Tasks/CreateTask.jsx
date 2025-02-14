@@ -12,7 +12,7 @@ const CreateTask = () => {
     // Handle task submission
     const onSubmit = async (data) => {
         try {
-            const response = await fetch("https://naria-group-ltd-server.vercel.app/tasks", {
+            const response = await fetch(`${import.meta.env.VITE_SERVER_API}/tasks`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ ...data, userId }),

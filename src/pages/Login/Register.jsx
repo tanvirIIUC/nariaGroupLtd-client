@@ -41,7 +41,7 @@ const Register = () => {
 
   const addUser = async (user) => {
     try {
-      const response = await fetch('https://naria-group-ltd-server.vercel.app/users', {
+      const response = await fetch(`${import.meta.env.VITE_SERVER_API}/users`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user),

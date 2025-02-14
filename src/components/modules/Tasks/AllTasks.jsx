@@ -7,7 +7,7 @@ const AllTasks = () => {
         const fetchTasks = async () => {
             try {
                 setLoading(true);
-                const response = await fetch(`https://naria-group-ltd-server.vercel.app/allTasks`, {
+                const response = await fetch(`${import.meta.env.VITE_SERVER_API}/allTasks`, {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('accessToken')}`,
                     },

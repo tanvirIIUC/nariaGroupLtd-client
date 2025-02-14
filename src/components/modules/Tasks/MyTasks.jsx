@@ -8,14 +8,14 @@ const MyTasks = () => {
     const [loading, setLoading] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [editTask, setEditTask] = useState(null);
-    
+
 
     // Fetch tasks for the user
     useEffect(() => {
         const fetchTasks = async () => {
             try {
                 setLoading(true);
-                const response = await fetch(`https://naria-group-ltd-server.vercel.app/tasks?userId=${userId}`, {
+                const response = await fetch(`${import.meta.env.VITE_SERVER_API}/tasks?userId=${userId}`, {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('accessToken')}`,
                     },
@@ -37,7 +37,7 @@ const MyTasks = () => {
         if (window.confirm("Are you sure you want to delete this task?")) {
             try {
                 setLoading(true);
-                await fetch(`https://naria-group-ltd-server.vercel.app/tasks/${taskId}`, {
+                await fetch(`${import.meta.env.VITE_SERVER_API}/tasks/${taskId}`, {
                     method: 'DELETE',
                 });
                 setTasks(tasks.filter(task => task._id !== taskId));
@@ -53,7 +53,7 @@ const MyTasks = () => {
     const updateTask = async (taskId, updatedData) => {
         try {
             setLoading(true);
-            await fetch(`https://naria-group-ltd-server.vercel.app/tasks/${taskId}`, {
+            await fetch(`${import.meta.env.VITE_SERVER_API}/tasks/${taskId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -76,8 +76,8 @@ const MyTasks = () => {
         setIsEditing(true);
         setEditTask(task);
     };
-    if(loading){
-        return <div className="w-28 h-28 mx-auto mt-32 border-4 border-dashed rounded-full animate-spin border-red-600"></div> 
+    if (loading) {
+        return <div className="w-28 h-28 mx-auto mt-32 border-4 border-dashed rounded-full animate-spin border-red-600"></div>
     }
     if (tasks?.length === 0) {
         return <div className="text-center font-semibold text-2xl mt-32">

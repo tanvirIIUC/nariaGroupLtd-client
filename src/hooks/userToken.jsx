@@ -4,7 +4,7 @@ const useToken = (email) => {
     const [token, setToken] = useState('');
     useEffect(() => {
         if (email) {
-            fetch(`https://naria-group-ltd-server.vercel.app/jwt?email=${email}`)
+            fetch(`${import.meta.env.VITE_SERVER_API}/jwt?email=${email}`)
                 .then(res => res.json())
                 .then(data => {
                     if (data.accessToken) {
