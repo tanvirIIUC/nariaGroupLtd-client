@@ -7,6 +7,7 @@ This is a **Task Management** application built with **MERN Stack**. The project
 - **Deployment:**
   - **Backend:** Deployed on Vercel.
   - **Frontend:** Deployed on Firebase.
+  - **Live Link:** [live link](https://nariagroupltd.web.app/)
 
 ---
 
