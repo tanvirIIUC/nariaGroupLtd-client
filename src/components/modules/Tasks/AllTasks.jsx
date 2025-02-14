@@ -1,35 +1,23 @@
 import { useEffect, useState } from "react";
+import { useGetAllTasks } from "../../../hooks/useGetAllTasks";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPostsData } from "../../../redux/features/getPostsSlice";
 
 const AllTasks = () => {
-    const [tasks, setTasks] = useState();
-    const [loading, setLoading] = useState(false)
+    const { tasks:data} = useGetAllTasks();
+
+    //redux
+    const {tasks,error,loading} = useSelector((state) => state.allPosts);
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        const fetchTasks = async () => {
-            try {
-                setLoading(true);
-                const response = await fetch(`${import.meta.env.VITE_SERVER_API}/allTasks`, {
-                    headers: {
-                        authorization: `bearer ${localStorage.getItem('accessToken')}`,
-                    },
-                });
-                const data = await response.json();
-    
-                // Sort tasks by dueDate (assuming ISO date format)
-                const sortedTasks = data.sort((a, b) => 
-                    new Date(b.dueDate).getTime()- new Date(a.dueDate).getTime()
-                );
-    
-                setTasks(sortedTasks);
-                setLoading(false);
-            } catch (error) {
-                console.error("Error fetching tasks:", error);
-                setLoading(false);
-            }
+        dispatch(fetchPostsData(data));
+
+        return () => {
+            // dispatch(clearData()); // Optional: Clear data when component unmounts
         };
-    
-        fetchTasks();
-    }, []);
-    
+    }, [dispatch, data]);
+
     if (loading) {
         return <div className="w-28 h-28 mx-auto mt-32 border-4 border-dashed rounded-full animate-spin border-red-600"></div>
     }
